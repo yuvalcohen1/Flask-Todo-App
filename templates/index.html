@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Management</title>
+  </head>
+  <body>
+    <h1>Welcome to my todo list app!</h1>
+    <h2>Todo List:</h2>
+    {% if tasks %}
+    <ul>
+      {% for task in tasks %}
+      <li>
+        {% if task.completed %} completed-
+        <strike
+          ><strong>{{ task.title }}</strong>: {{ task.description }}</strike
+        >
+        {% else %}
+        <strong>{{ task.title }}</strong>: {{ task.description }}
+        <a href="/complete/{{ task.id }}">[Mark as completed]</a>
+        {% endif %}
+        <a href="/edit/{{ task.id }}">[Edit]</a>
+        <a href="/delete/{{ task.id }}" style="color: red">[Delete]</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No tasks at the moment... Add one:</p>
+    {% endif %}
+    <p><a href="/add">Add New Task</a></p>
+  </body>
+</html>
